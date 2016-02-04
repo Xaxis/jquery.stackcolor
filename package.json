@@ -1,7 +1,7 @@
 {
   "name": "jquery.stackcolor",
   "version": "1.0.0",
-  "description": "A jQuery plugin scaffolding to assist in the rapid development of jQuery plugins.",
+  "description": "A jQuery plugin for determining the average color of elements beaneath another element.",
   "main": "index.js",
   "directories": {
     "test": "test"
