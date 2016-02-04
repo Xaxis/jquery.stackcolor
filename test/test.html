@@ -5,11 +5,73 @@
     <title>jquery.stackcolor</title>
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../dist/jquery.stackcolor.min.js"></script>
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+        }
+        .fixed-elm {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            width: 100%;
+            height: 300px;
+            background: black;
+            border: 2px dashed deepskyblue;
+        }
+        .elm {
+            width: 100%;
+            height: 200px;
+        }
+        #elm1 {
+            background: red;
+        }
+        #elm2 {
+            background: cyan;
+        }
+        #elm3 {
+            background: deeppink;
+        }
+        #elm4 {
+            background: darkgray;
+        }
+        #elm5 {
+            background: darkslategray;
+        }
+        #elm6 {
+            background: black;
+        }
+    </style>
 </head>
 <body>
-
+<div class="fixed-elm"></div>
+<div class="elm" id="elm1" data-stackcolor="true">
+    <!--<div class="elm" id="elm2"></div>-->
+    <!--<div class="elm" id="elm3"></div>-->
+</div>
+<div class="elm" id="elm2" data-stackcolor="false"></div>
+<div class="elm" id="elm3" data-stackcolor="false"></div>
+<div class="elm" id="elm4" data-stackcolor="false"></div>
+<div class="elm" id="elm5" data-stackcolor="false"></div>
+<div class="elm" id="elm6" data-stackcolor="false"></div>
 <script>
 
+    // What is the average of the element colors beneath fixed target element?
+    $('.fixed-elm').stackcolor({
+        onResult: function(rgb_avg, hex_avg, elm) {
+            console.log(rgb_avg, hex_avg, elm);
+        }
+    });
+
+    // On scroll, average colors of elements beneath fixed target element
+    $(window).on('scroll', function() {
+        $('.fixed-elm').stackcolor({
+            onResult: function(rgb_avg, hex_avg, elm) {
+                console.log(rgb_avg, hex_avg, elm);
+            }
+        });
+    });
 </script>
 </body>
 </html>
