@@ -56,7 +56,11 @@
       avg_color = this.calcColorAverages(all_colors);
 
       // Execute onResult callback
-      this.options.onResult.call(this, avg_color.rgb, avg_color.hex, elm);
+      this.options.onResult.call(this, {
+        rgb: avg_color.rgb,
+        hex: avg_color.hex,
+        elm: elm
+      });
     },
 
     /**
@@ -143,8 +147,11 @@
       }
 
       // Average decimal colors
-      var rgb_avg = [Math.floor(r / rgb_colors.length), Math.floor(g / rgb_colors.length), Math.floor(b / rgb_colors.length)];
-      var hex_avg = '#' + this.rgb2hex('rgb(' + rgb_avg[0] + ', ' + rgb_avg[1] +', ' + rgb_avg[2] +')');
+      var rgb_avg = {
+        r: Math.floor(r / rgb_colors.length),
+        g: Math.floor(g / rgb_colors.length),
+        b: Math.floor(b / rgb_colors.length)};
+      var hex_avg = this.rgb2hex('rgb(' + rgb_avg.r + ', ' + rgb_avg.g +', ' + rgb_avg.b +')');
 
       // Return color average object
       return {

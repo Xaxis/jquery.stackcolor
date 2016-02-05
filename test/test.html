@@ -16,7 +16,7 @@
             left: 0;
             z-index: 100;
             width: 100%;
-            height: 300px;
+            height: 50px;
             background: black;
             border: 2px dashed deepskyblue;
         }
@@ -25,6 +25,7 @@
             height: 200px;
         }
         #elm1 {
+            overflow: auto;
             background: red;
         }
         #elm2 {
@@ -42,33 +43,51 @@
         #elm6 {
             background: black;
         }
+        #subelm1 {
+            width: 50%;
+            float: left;
+            background: yellow;
+        }
+        #subelm2 {
+            width: 50%;
+            float: left;
+            background: orange;
+        }
+        #subelm3 {
+            width: 50px;
+            height: 50px;
+            background: silver;
+        }
     </style>
 </head>
 <body>
 <div class="fixed-elm"></div>
 <div class="elm" id="elm1" data-stackcolor="true">
-    <!--<div class="elm" id="elm2"></div>-->
-    <!--<div class="elm" id="elm3"></div>-->
+    <div class="elm" id="subelm1"></div>
+    <div class="elm" id="subelm2"></div>
 </div>
 <div class="elm" id="elm2" data-stackcolor="false"></div>
-<div class="elm" id="elm3" data-stackcolor="false"></div>
+<div class="elm" id="elm3" data-stackcolor="true">
+    <div class="elm" id="subelm3"></div>
+</div>
 <div class="elm" id="elm4" data-stackcolor="false"></div>
 <div class="elm" id="elm5" data-stackcolor="false"></div>
 <div class="elm" id="elm6" data-stackcolor="false"></div>
 <script>
 
-    // What is the average of the element colors beneath fixed target element?
+    // Change target element color to average color of elements it is over
     $('.fixed-elm').stackcolor({
-        onResult: function(rgb_avg, hex_avg, elm) {
-            console.log(rgb_avg, hex_avg, elm);
+        onResult: function(result) {
+            result.elm.css('background', '#' + result.hex);
         }
     });
 
-    // On scroll, average colors of elements beneath fixed target element
+    // Fixed target element on scroll
     $(window).on('scroll', function() {
         $('.fixed-elm').stackcolor({
-            onResult: function(rgb_avg, hex_avg, elm) {
-                console.log(rgb_avg, hex_avg, elm);
+            onResult: function(result) {
+                console.log(result);
+                result.elm.css('background', '#' + result.hex);
             }
         });
     });
